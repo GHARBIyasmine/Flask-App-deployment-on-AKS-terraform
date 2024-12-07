@@ -1,0 +1,10 @@
+# Exclude Jenkinsfile
+Jenkinsfile
+
+# Exclude Terraform directory
+terraform/
+
+# Exclude other unnecessary files or directories (examples below)
+*.log
+__pycache__/
+*.pyc
