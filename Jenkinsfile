@@ -4,6 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = "yasminegharbi/flask-docker-app"
         DOCKER_IMAGE_TAG = "latest"
+        NAMESPACE = "default"
+        DEPLOYMENT_NAME = "flask-app"
     }
 
     stages {
@@ -80,8 +82,15 @@ pipeline {
 
                         dir('kubernetes') {
                             sh '''
-                            sed -i "s/{{ timestamp }}/$(date +%s)/" manifest.yaml
-                            kubectl apply -f manifest.yaml
+                            # Check if the deployment exists
+                                if kubectl get deployment "$DEPLOYMENT_NAME" -n "$NAMESPACE" > /dev/null 2>&1; then
+                                    kubectl apply -f manifest.yaml
+                                    echo "Deployment '$DEPLOYMENT_NAME' exists. Restarting rollout..."
+                                    kubectl rollout restart deployment "$DEPLOYMENT_NAME" -n "$NAMESPACE"
+                                else
+                                    echo "Deployment '$DEPLOYMENT_NAME' does not exist. Applying manifest for the first time..."
+                                    kubectl apply -f manifest.yaml
+                                fi
                             '''
                         }
 

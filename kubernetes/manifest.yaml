@@ -5,8 +5,6 @@ metadata:
   name: flask-app
   labels:
     app: flask-app
-  annotations:
-    pipeline-trigger: "{{ timestamp }}"
 spec:
   replicas: 2  
   selector:
