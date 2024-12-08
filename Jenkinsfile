@@ -55,7 +55,7 @@ pipeline {
 
                             terraform init -input=false
                             terraform plan -input=false
-                            terraform apply -auto-approve || echo "Resource may already exist; skipping apply."
+                            terraform apply -auto-approve 
                             '''
                         }
                     }
