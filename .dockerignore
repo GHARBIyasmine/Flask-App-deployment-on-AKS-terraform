@@ -4,6 +4,9 @@ Jenkinsfile
 # Exclude Terraform directory
 terraform/
 
+# Exclude kubernetes directory
+kubernetes/
+
 # Exclude other unnecessary files or directories (examples below)
 *.log
 __pycache__/
