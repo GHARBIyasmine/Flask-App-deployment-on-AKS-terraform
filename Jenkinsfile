@@ -13,6 +13,15 @@ pipeline {
             }
         }
 
+        stage('Setup Terraform') {
+            steps {
+                script {
+                    def terraformPath = tool name: 'terraform'
+                    env.PATH = "${terraformPath}:${env.PATH}"
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
