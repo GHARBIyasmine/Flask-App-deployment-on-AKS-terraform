@@ -79,7 +79,10 @@ pipeline {
                         }
 
                         dir('kubernetes') {
-                            sh 'kubectl apply -f manifest.yaml'
+                            sh '''
+                            sed -i "s/{{ timestamp }}/$(date +%s)/" manifest.yaml
+                            kubectl apply -f manifest.yaml
+                            '''
                         }
 
                         sh 'az logout'
