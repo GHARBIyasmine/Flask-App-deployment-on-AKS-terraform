@@ -57,10 +57,10 @@ pipeline {
 
 
                             chmod +x check_resources.sh
-                            
+
                             terraform init 
                             terraform plan 
-                            terraform apply -auto-approve 
+                            TF_LOG=TRACE terraform apply -auto-approve 
                             '''
                         }
                     }
