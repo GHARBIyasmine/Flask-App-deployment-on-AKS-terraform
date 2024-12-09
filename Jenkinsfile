@@ -60,7 +60,7 @@ pipeline {
 
                             terraform init 
                             terraform plan 
-                            TF_LOG=TRACE terraform apply -auto-approve 
+                            terraform apply -auto-approve 
                             '''
                         }
                     }
