@@ -55,8 +55,11 @@ pipeline {
                             export ARM_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
                             export ARM_TENANT_ID=$AZURE_TENANT_ID
 
-                            terraform init -input=false
-                            terraform plan -input=false
+
+                            chmod +x check_resources.sh
+                            
+                            terraform init 
+                            terraform plan 
                             terraform apply -auto-approve 
                             '''
                         }
