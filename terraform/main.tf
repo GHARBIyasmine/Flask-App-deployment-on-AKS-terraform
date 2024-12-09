@@ -8,6 +8,10 @@ data "external" "check_resources" {
   }
 }
 
+# Debugging outputs
+output "check_resources_debug" {
+  value = data.external.check_resources.result
+}
 
 resource "azurerm_resource_group" "rg" {
   count    = data.external.check_resources.result.group_exists == "false" ? 1 : 0
@@ -19,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   count               = data.external.check_resources.result.aks_exists == "false" ? 1 : 0
   name                = var.name
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg[0].name
 
   dns_prefix = "${var.name}-dns01"
 
