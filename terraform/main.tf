@@ -8,14 +8,13 @@ data "external" "check_resources" {
   }
 }
 
-# Resource group creation logic
+
 resource "azurerm_resource_group" "rg" {
-  count    = data.external.check_resources.result.group_exists == "true" ? 0 : 1
+  count    = data.external.check_resources.result.group_exists == "false" ? 1 : 0
   name     = var.resource_group_name
   location = var.location
 }
 
-# AKS cluster creation logic
 resource "azurerm_kubernetes_cluster" "aks" {
   count               = data.external.check_resources.result.aks_exists == "false" ? 1 : 0
   name                = var.name
