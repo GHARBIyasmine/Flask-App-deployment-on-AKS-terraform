@@ -8,10 +8,6 @@ data "external" "check_resources" {
   }
 }
 
-# Debugging outputs
-output "check_resources_debug" {
-  value = data.external.check_resources.result
-}
 
 resource "azurerm_resource_group" "rg" {
   count    = data.external.check_resources.result.group_exists == "false" ? 1 : 0
