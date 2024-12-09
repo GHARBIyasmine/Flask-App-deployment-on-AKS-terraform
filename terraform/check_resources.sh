@@ -1,5 +1,7 @@
 #!/bin/bash
 
+az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+
 # Extract inputs from Terraform
 eval "$(jq -r '@sh "GROUP_NAME=\(.group_name) CLUSTER_NAME=\(.cluster_name)"')"
 group_exists=$(az group exists -n "$GROUP_NAME")
