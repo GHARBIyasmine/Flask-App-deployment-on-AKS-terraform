@@ -56,6 +56,8 @@ pipeline {
                             export ARM_TENANT_ID=$AZURE_TENANT_ID
 
 
+
+                            az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                             chmod +x check_resources.sh
 
                             terraform init 
