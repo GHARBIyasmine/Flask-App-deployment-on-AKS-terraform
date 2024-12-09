@@ -1,6 +1,6 @@
 # Data block to check if the resource group and AKS cluster exist
 data "external" "check_resources" {
-  program = ["bash", "check_resources.sh"]
+  program = ["/bin/bash", "check_resources.sh"]
 
   query = {
     group_name   = var.resource_group_name
